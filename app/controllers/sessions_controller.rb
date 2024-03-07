@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
         redirect_to "/login"
       end
     else
-      flash["notice"] = "Nope."
+      flash["notice"] = "Nope. Email Doesn't Exist"
       redirect_to "/login"
     end
   end
