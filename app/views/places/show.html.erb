@@ -1,15 +1,25 @@
-
+<!-- if user is logged in run the following-->
 <% if @user != nil%>
 <h1><%= @place["name"] %></h1>
 
 <h2>My Entries</h2>
-<% for entry in @entries %>
-  <h3><%= entry["title"] %></h3>
-  <h4><%= entry["occurred_on"] %></h4>
-  <p><%= entry["description"] %></p>
-<% end %>
+<div class="row">
+  <% for entry in @entries %>
+    <div class="col-sm-6 col-md-3">
+      <h3><%= entry["title"] %></h3>
+      <h4><%= entry["occurred_on"] %></h4>
+      <!-- show image if attached-->
+      <% if entry.uploaded_image.attached? %>
+        <img src="<%= url_for(entry.uploaded_image) %>" class="img-fluid">
+        
+      <% end %>
+      <p><%= entry["description"] %></p>
+    </div>
+  <% end %>
+</div>
 
 <p>
+<!-- create entry with place and user parameters-->
   <a href="/entries/new?place_id=<%= @place["id"] %>&user_id=<%= @user["id"] %>">New Entry</a>
 </p>
 
